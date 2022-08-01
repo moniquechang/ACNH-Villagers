@@ -1,0 +1,38 @@
+.container {
+  margin: auto;
+  max-width: 575px;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  width: 100%;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .column-fourth {
+    width: 25%;
+  }
+
+  .list-display {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  li {
+    display: flex;
+    justify-content: end;
+  }
+}
