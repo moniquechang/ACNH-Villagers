@@ -1,19 +1,25 @@
+.hidden {
+  display: none;
+}
+
+.gorditas {
+  font-family: Gorditas, cursive;
+}
+
 body {
   background-image: url("../images/background.png");
 }
 
 header {
   background-color: #70604a;
-  color: white;
-  font-family: Gorditas, cursive;
 }
 
 h3 {
   margin-left: 1.4rem;
+  color: white;
 }
 
 h1 {
-  font-family: Gorditas, cursive;
   color: #70604a;
   margin-left: 1.4rem;
   margin-top: 0.2rem;
@@ -25,7 +31,6 @@ form {
 }
 
 input {
-  font-family: Gorditas, cursive;
   font-size: 1.4rem;
   color: #70604a;
   border: none;
@@ -38,6 +43,12 @@ input {
 
 input:focus {
   outline: none;
+}
+
+h2 {
+  text-align: center;
+  color: #70604a;
+  margin-top: 3rem;
 }
 
 ul {
