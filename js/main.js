@@ -9,12 +9,12 @@ xhr.addEventListener('load', function () {
     dataArr.push(xhr.response[keys]);
   }
   for (var i = 0; i < dataArr.length; i++) {
-    $ul.appendChild(renderVillager(dataArr, i));
+    $ul.appendChild(renderVillager(dataArr[i]));
   }
 });
 xhr.send();
 
-function renderVillager(data, num) {
+function renderVillager(data) {
   var $li = document.createElement('li');
   $li.setAttribute('class', 'column-full column-fourth');
 
@@ -23,12 +23,12 @@ function renderVillager(data, num) {
   $li.appendChild($div);
 
   var $img = document.createElement('img');
-  $img.setAttribute('src', data[num].image_uri);
-  $img.setAttribute('alt', data[num].name['name-USen']);
+  $img.setAttribute('src', data.image_uri);
+  $img.setAttribute('alt', data.name['name-USen']);
   $div.appendChild($img);
 
   var $p = document.createElement('p');
-  var name = document.createTextNode(data[num].name['name-USen']);
+  var name = document.createTextNode(data.name['name-USen']);
   $p.appendChild(name);
   $div.appendChild($p);
 
