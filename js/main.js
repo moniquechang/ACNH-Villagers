@@ -9,22 +9,12 @@ xhr.addEventListener('load', function () {
     dataArr.push(xhr.response[keys]);
   }
   for (var i = 0; i < dataArr.length; i++) {
-    data.name.push(dataArr[i].name['name-USen']);
-    data.image.push(dataArr[i].image_uri);
-    data.id.push(dataArr[i].id);
-    data.birthday.push(dataArr[i]['birthday-string']);
-    data.species.push(dataArr[i].species);
-    data.personality.push(dataArr[i].personality);
-    data.catchphrase.push(dataArr[i]['catch-phrase']);
-    data.icon.push(dataArr[i].icon_uri);
-  }
-  for (var k = 0; k < data.name.length; k++) {
-    $ul.appendChild(renderVillager(data, k));
+    $ul.appendChild(renderVillager(dataArr, i));
   }
 });
 xhr.send();
 
-function renderVillager(villager, num) {
+function renderVillager(data, num) {
   var $li = document.createElement('li');
   $li.setAttribute('class', 'column-full column-fourth');
 
@@ -33,12 +23,12 @@ function renderVillager(villager, num) {
   $li.appendChild($div);
 
   var $img = document.createElement('img');
-  $img.setAttribute('src', villager.image[num]);
-  $img.setAttribute('alt', villager.name[num]);
+  $img.setAttribute('src', data[num].image_uri);
+  $img.setAttribute('alt', data[num].name['name-USen']);
   $div.appendChild($img);
 
   var $p = document.createElement('p');
-  var name = document.createTextNode(villager.name[num]);
+  var name = document.createTextNode(data[num].name['name-USen']);
   $p.appendChild(name);
   $div.appendChild($p);
 
