@@ -1,4 +1,5 @@
 var dataArr = [];
+// var $ul = document.querySelector('ul');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -19,3 +20,25 @@ xhr.addEventListener('load', function () {
   }
 });
 xhr.send();
+
+/* function renderVillager(villager, num) {
+  var $li = document.createElement('li');
+  $li.setAttribute('class', 'column-full column-fourth');
+
+  var $div = document.createElement('div');
+  $div.setAttribute('class', 'villager-polaroid');
+  $li.appendChild($div);
+
+  var $img = document.createElement('img');
+  $img.setAttribute('src', villager.image[num]);
+  $img.setAttribute('alt', villager.name[num]);
+  $div.appendChild($img);
+
+  var $p = document.createElement('p');
+  var name = document.createTextNode(villager.name[num]);
+  $p.appendChild(name);
+  $div.appendChild($p);
+
+  return $li;
+}
+*/
