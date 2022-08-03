@@ -1,28 +1,60 @@
+.hidden {
+  display: none;
+}
+
+.gorditas {
+  font-family: Gorditas, cursive;
+}
+
 body {
   background-image: url("../images/background.png");
 }
 
 header {
   background-color: #70604a;
-  color: white;
-  font-family: Gorditas, cursive;
 }
 
 h3 {
   margin-left: 1.4rem;
+  color: white;
 }
 
 h1 {
-  font-family: Gorditas, cursive;
   color: #70604a;
   margin-left: 1.4rem;
   margin-top: 0.2rem;
   margin-bottom: 0;
 }
 
+form {
+  text-align: end;
+}
+
+input {
+  font-size: 1.4rem;
+  color: #70604a;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  width: 9rem;
+  padding-left: 0.8rem;
+  margin-right: 1.2rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+h2 {
+  text-align: center;
+  color: #70604a;
+  margin-top: 3rem;
+}
+
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .villager-polaroid {
@@ -48,6 +80,11 @@ p {
 
 @media screen and (min-width: 768px) {
   h1 {
-    margin-top: 1.2rem;
+    margin-top: 1.4rem;
+    font-size: 2.5rem;
+  }
+
+  input {
+    margin: 0;
   }
 }
