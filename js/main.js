@@ -2,7 +2,7 @@ var dataArr = [];
 var $ul = document.querySelector('ul');
 var searchInput = document.querySelector('input');
 var $form = document.querySelector('form');
-// var searchDefaultText = document.querySelector('h2');
+var searchDefaultText = document.querySelector('h2');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -39,15 +39,31 @@ function renderVillager(data) {
   return $li;
 }
 
+function handleSearchInput(event) {
+  var liNodeList = document.querySelectorAll('li');
+  for (var i = 0; i < liNodeList.length; i++) {
+    if (searchInput.value === '') {
+      liNodeList[i].className = 'column-full column-fourth';
+      searchDefaultText.className = 'gorditas hidden';
+    }
+  }
+}
+
+$form.addEventListener('input', handleSearchInput);
+
 function handleSearchInputSubmit(event) {
   event.preventDefault();
   var liNodeList = document.querySelectorAll('li');
+  searchDefaultText.className = 'gorditas';
   for (var i = 0; i < liNodeList.length; i++) {
     liNodeList[i].className = 'column-full column-fourth hidden';
   }
   for (var k = 0; k < liNodeList.length; k++) {
-    if (searchInput.value === liNodeList[k].getAttribute('data-villager') || searchInput.value === liNodeList[k].getAttribute('data-villager').toLowerCase() || searchInput.value === liNodeList[k].getAttribute('data-villager').toUpperCase()) {
+    if (searchInput.value === liNodeList[k].getAttribute('data-villager') ||
+         searchInput.value === liNodeList[k].getAttribute('data-villager').toLowerCase() ||
+         searchInput.value === liNodeList[k].getAttribute('data-villager').toUpperCase()) {
       liNodeList[k].className = 'column-full column-fourth';
+      searchDefaultText.className = 'gorditas hidden';
       break;
     }
   }
