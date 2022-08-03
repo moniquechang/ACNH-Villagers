@@ -46,7 +46,7 @@ function handleSearchInputSubmit(event) {
     liNodeList[i].className = 'column-full column-fourth hidden';
   }
   for (var k = 0; k < liNodeList.length; k++) {
-    if (searchInput.value === liNodeList[k].getAttribute('data-villager')) {
+    if (searchInput.value === liNodeList[k].getAttribute('data-villager') || searchInput.value === liNodeList[k].getAttribute('data-villager').toLowerCase() || searchInput.value === liNodeList[k].getAttribute('data-villager').toUpperCase()) {
       liNodeList[k].className = 'column-full column-fourth';
       break;
     }
