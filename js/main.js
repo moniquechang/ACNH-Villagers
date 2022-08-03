@@ -82,6 +82,7 @@ function renderVillagerInfo(data) {
   var villagerIcon = document.createElement('img');
   villagerIcon.setAttribute('src', data.icon_uri);
   villagerIcon.setAttribute('alt', data.name['name-USen'] + ' icon');
+  villagerIcon.setAttribute('class', 'icon');
   modalWindowPaperDiv.appendChild(villagerIcon);
 
   var nameP = document.createElement('p');
@@ -120,10 +121,10 @@ function renderVillagerInfo(data) {
 function nameHandleClick(event) {
   if (event.target.matches('.villager-polaroid > p')) {
     infoModalBackground.className = 'info-modal modal-background';
-    var liNodeList = document.querySelectorAll('li');
-    for (var i = 0; i < liNodeList.length; i++) {
-      if (event.target.textContent === liNodeList[i].getAttribute('data-villager')) {
-        modalWindowContainer.appendChild(renderVillagerInfo(liNodeList[i].getAttribute));
+    for (var i = 0; i < dataArr.length; i++) {
+      if (event.target.textContent === dataArr[i].name['name-USen']) {
+        modalWindowContainer.appendChild(renderVillagerInfo(dataArr[i]));
+        break;
       }
     }
   }
