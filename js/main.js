@@ -3,6 +3,8 @@ var $ul = document.querySelector('ul');
 var searchInput = document.querySelector('input');
 var $form = document.querySelector('form');
 var searchDefaultText = document.querySelector('h2');
+var modalWindowContainer = document.querySelector('.modal-window-container');
+var infoModalBackground = document.querySelector('.info-modal');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -68,3 +70,68 @@ function handleSearchInputSubmit(event) {
 }
 
 $form.addEventListener('submit', handleSearchInputSubmit);
+
+function renderVillagerInfo(data) {
+  var modalWindowPaperDiv = document.createElement('div');
+  modalWindowPaperDiv.setAttribute('class', 'modal-window-paper');
+
+  var xmarkIcon = document.createElement('i');
+  xmarkIcon.setAttribute('class', 'fa-solid fa-rectangle-xmark');
+  modalWindowPaperDiv.appendChild(xmarkIcon);
+
+  var villagerIcon = document.createElement('img');
+  villagerIcon.setAttribute('src', data.icon_uri);
+  villagerIcon.setAttribute('alt', data.name['name-USen'] + ' icon');
+  modalWindowPaperDiv.appendChild(villagerIcon);
+
+  var nameP = document.createElement('p');
+  var nameText = document.createTextNode('Name: ' + data.name['name-USen']);
+  nameP.appendChild(nameText);
+  modalWindowPaperDiv.appendChild(nameP);
+
+  var speciesP = document.createElement('p');
+  var speciesText = document.createTextNode('Species: ' + data.species);
+  speciesP.appendChild(speciesText);
+  modalWindowPaperDiv.appendChild(speciesP);
+
+  var personalityP = document.createElement('p');
+  var personalityText = document.createTextNode('Personality: ' + data.personality);
+  personalityP.appendChild(personalityText);
+  modalWindowPaperDiv.appendChild(personalityP);
+
+  var bdayP = document.createElement('p');
+  var bdayText = document.createTextNode('Birthday: ' + data['birthday-string']);
+  bdayP.appendChild(bdayText);
+  modalWindowPaperDiv.appendChild(bdayP);
+
+  var catchphraseP = document.createElement('p');
+  var catchphraseText = document.createTextNode('Catch Phrase: ' + data['catch-phrase']);
+  catchphraseP.appendChild(catchphraseText);
+  modalWindowPaperDiv.appendChild(catchphraseP);
+
+  var modalLeafImage = document.createElement('img');
+  modalLeafImage.setAttribute('src', 'images/modal-window-leaf.png');
+  modalLeafImage.setAttribute('class', 'modal-leaf');
+  modalWindowPaperDiv.appendChild(modalLeafImage);
+
+  return modalWindowPaperDiv;
+}
+
+function nameHandleClick(event) {
+  if (event.target.matches('.villager-polaroid > p')) {
+    infoModalBackground.className = 'info-modal modal-background';
+    var liNodeList = document.querySelectorAll('li');
+    for (var i = 0; i < liNodeList.length; i++) {
+      if (event.target.textContent === liNodeList[i].getAttribute('data-villager')) {
+        modalWindowContainer.appendChild(renderVillagerInfo(liNodeList[i].getAttribute));
+      }
+    }
+  }
+  var modalWindowPaperDiv = document.querySelector('.modal-window-paper');
+  if (event.target.matches('.fa-rectangle-xmark')) {
+    infoModalBackground.className = 'info-modal modal-background hidden';
+    modalWindowContainer.removeChild(modalWindowPaperDiv);
+  }
+}
+
+document.addEventListener('click', nameHandleClick);
