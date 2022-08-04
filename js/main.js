@@ -5,6 +5,7 @@ var $form = document.querySelector('form');
 var searchDefaultText = document.querySelector('h2');
 var modalWindowContainer = document.querySelector('.modal-window-container');
 var infoModalBackground = document.querySelector('.info-modal');
+var confirmModalBackground = document.querySelector('.confirm-modal');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -140,3 +141,32 @@ function nameHandleClick(event) {
 }
 
 document.addEventListener('click', nameHandleClick);
+
+function heartHandleClick(event) {
+  var heartIcon = document.querySelectorAll('.fa-heart');
+  if (event.target.matches('.fa-regular')) {
+    confirmModalBackground.className = 'confirm-modal modal-background';
+    event.target.setAttribute('data-target', 'yes');
+  }
+  if (event.target.matches('.yes-button')) {
+    confirmModalBackground.className = 'confirm-modal modal-background hidden';
+    for (var i = 0; i < heartIcon.length; i++) {
+      if (heartIcon[i].getAttribute('data-target')) {
+        heartIcon[i].className = 'fa-solid fa-heart';
+        heartIcon[i].removeAttribute('data-target');
+        return;
+      }
+    }
+  }
+  if (event.target.matches('.no-button')) {
+    confirmModalBackground.className = 'confirm-modal modal-background hidden';
+    for (var k = 0; k < heartIcon.length; k++) {
+      if (heartIcon[k].getAttribute('data-target')) {
+        heartIcon[k].removeAttribute('data-target');
+        return;
+      }
+    }
+  }
+}
+
+document.addEventListener('click', heartHandleClick);
