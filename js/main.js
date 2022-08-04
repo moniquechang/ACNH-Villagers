@@ -5,6 +5,7 @@ var $form = document.querySelector('form');
 var searchDefaultText = document.querySelector('h2');
 var modalWindowContainer = document.querySelector('.modal-window-container');
 var infoModalBackground = document.querySelector('.info-modal');
+var confirmModalBackground = document.querySelector('.confirm-modal');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -20,25 +21,29 @@ xhr.addEventListener('load', function () {
 xhr.send();
 
 function renderVillager(data) {
-  var $li = document.createElement('li');
-  $li.setAttribute('class', 'column-full column-fourth');
-  $li.setAttribute('data-villager', data.name['name-USen']);
+  var list = document.createElement('li');
+  list.setAttribute('class', 'column-full column-fourth');
+  list.setAttribute('data-villager', data.name['name-USen']);
 
-  var $div = document.createElement('div');
-  $div.setAttribute('class', 'villager-polaroid');
-  $li.appendChild($div);
+  var villagerPolaroidDiv = document.createElement('div');
+  villagerPolaroidDiv.setAttribute('class', 'villager-polaroid');
+  list.appendChild(villagerPolaroidDiv);
 
-  var $img = document.createElement('img');
-  $img.setAttribute('src', data.image_uri);
-  $img.setAttribute('alt', data.name['name-USen']);
-  $div.appendChild($img);
+  var villagerImage = document.createElement('img');
+  villagerImage.setAttribute('src', data.image_uri);
+  villagerImage.setAttribute('alt', data.name['name-USen']);
+  villagerPolaroidDiv.appendChild(villagerImage);
 
-  var $p = document.createElement('p');
+  var villagerName = document.createElement('p');
   var name = document.createTextNode(data.name['name-USen']);
-  $p.appendChild(name);
-  $div.appendChild($p);
+  villagerName.appendChild(name);
+  villagerPolaroidDiv.appendChild(villagerName);
 
-  return $li;
+  var heartIcon = document.createElement('i');
+  heartIcon.setAttribute('class', 'fa-regular fa-heart');
+  villagerPolaroidDiv.appendChild(heartIcon);
+
+  return list;
 }
 
 function handleSearchInput(event) {
@@ -136,3 +141,37 @@ function nameHandleClick(event) {
 }
 
 document.addEventListener('click', nameHandleClick);
+
+function heartHandleClick(event) {
+  var heartIcon = document.querySelectorAll('.fa-heart');
+  if (event.target.matches('.fa-regular')) {
+    confirmModalBackground.className = 'confirm-modal modal-background';
+    event.target.setAttribute('data-target', 'yes');
+  }
+  if (event.target.matches('.yes-button')) {
+    confirmModalBackground.className = 'confirm-modal modal-background hidden';
+    for (var i = 0; i < heartIcon.length; i++) {
+      if (heartIcon[i].getAttribute('data-target')) {
+        heartIcon[i].className = 'fa-solid fa-heart';
+        heartIcon[i].removeAttribute('data-target');
+        var favDataObj = {
+          name: dataArr[i].name['name-USen'],
+          image: dataArr[i].image_uri
+        };
+        data.favVillagers.push(favDataObj);
+        return;
+      }
+    }
+  }
+  if (event.target.matches('.no-button')) {
+    confirmModalBackground.className = 'confirm-modal modal-background hidden';
+    for (var k = 0; k < heartIcon.length; k++) {
+      if (heartIcon[k].getAttribute('data-target')) {
+        heartIcon[k].removeAttribute('data-target');
+        return;
+      }
+    }
+  }
+}
+
+document.addEventListener('click', heartHandleClick);
