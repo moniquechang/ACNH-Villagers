@@ -154,6 +154,11 @@ function heartHandleClick(event) {
       if (heartIcon[i].getAttribute('data-target')) {
         heartIcon[i].className = 'fa-solid fa-heart';
         heartIcon[i].removeAttribute('data-target');
+        var favDataObj = {
+          name: dataArr[i].name['name-USen'],
+          image: dataArr[i].image_uri
+        };
+        data.favVillagers.push(favDataObj);
         return;
       }
     }
