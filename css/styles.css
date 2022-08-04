@@ -139,6 +139,44 @@ p {
   width: 20%;
 }
 
+.confirm-modal-window {
+  width: 100%;
+  background-color: #ebe3da;
+  border-radius: 1rem;
+  padding: 3rem 1rem;
+}
+
+.confirm-modal-text {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.button-div {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.no-button {
+  font-family: "Gochi Hand", cursive;
+  color: white;
+  background-color: #70604a;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 2rem;
+  padding: 0.3rem 0.9rem;
+}
+
+.yes-button {
+  font-family: "Gochi Hand", cursive;
+  color: #70604a;
+  background-color: white;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 2rem;
+  padding: 0.3rem 0.9rem;
+}
+
 .hidden {
   display: none;
 }
@@ -174,5 +212,9 @@ p {
   .modal-leaf {
     width: 18%;
     bottom: -1.3rem;
+  }
+
+  .confirm-modal-window {
+    width: 30%;
   }
 }
