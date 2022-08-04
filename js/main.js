@@ -20,25 +20,29 @@ xhr.addEventListener('load', function () {
 xhr.send();
 
 function renderVillager(data) {
-  var $li = document.createElement('li');
-  $li.setAttribute('class', 'column-full column-fourth');
-  $li.setAttribute('data-villager', data.name['name-USen']);
+  var list = document.createElement('li');
+  list.setAttribute('class', 'column-full column-fourth');
+  list.setAttribute('data-villager', data.name['name-USen']);
 
-  var $div = document.createElement('div');
-  $div.setAttribute('class', 'villager-polaroid');
-  $li.appendChild($div);
+  var villagerPolaroidDiv = document.createElement('div');
+  villagerPolaroidDiv.setAttribute('class', 'villager-polaroid');
+  list.appendChild(villagerPolaroidDiv);
 
-  var $img = document.createElement('img');
-  $img.setAttribute('src', data.image_uri);
-  $img.setAttribute('alt', data.name['name-USen']);
-  $div.appendChild($img);
+  var villagerImage = document.createElement('img');
+  villagerImage.setAttribute('src', data.image_uri);
+  villagerImage.setAttribute('alt', data.name['name-USen']);
+  villagerPolaroidDiv.appendChild(villagerImage);
 
-  var $p = document.createElement('p');
+  var villagerName = document.createElement('p');
   var name = document.createTextNode(data.name['name-USen']);
-  $p.appendChild(name);
-  $div.appendChild($p);
+  villagerName.appendChild(name);
+  villagerPolaroidDiv.appendChild(villagerName);
 
-  return $li;
+  var heartIcon = document.createElement('i');
+  heartIcon.setAttribute('class', 'fa-regular fa-heart');
+  villagerPolaroidDiv.appendChild(heartIcon);
+
+  return list;
 }
 
 function handleSearchInput(event) {
