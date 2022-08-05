@@ -6,6 +6,7 @@ var searchDefaultText = document.querySelector('h2');
 var modalWindowContainer = document.querySelector('.modal-window-container');
 var infoModalBackground = document.querySelector('.info-modal');
 var confirmModalBackground = document.querySelector('.confirm-modal');
+var viewNodeList = document.querySelectorAll('.view');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -181,3 +182,23 @@ function heartHandleClick(event) {
 }
 
 document.addEventListener('click', heartHandleClick);
+
+function viewSwap(dataView) {
+  for (var i = 0; i < viewNodeList.length; i++) {
+    if (viewNodeList[i].getAttribute('data-view') === dataView) {
+      viewNodeList[i].className = 'container view';
+    } else {
+      viewNodeList[i].className = 'container view hidden';
+    }
+  }
+}
+
+function viewSwapHandleClick(event) {
+  if (event.target.matches('a') === false) {
+    return;
+  }
+  viewSwap(event.target.getAttribute('data-view'));
+  data.dataView = event.target.getAttribute('data-view');
+}
+
+document.addEventListener('click', viewSwapHandleClick);
