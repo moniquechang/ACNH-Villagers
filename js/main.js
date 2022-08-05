@@ -1,11 +1,14 @@
 var dataArr = [];
-var $ul = document.querySelector('ul');
+var allVillagerUl = document.querySelector('.all-villager-list');
 var searchInput = document.querySelector('input');
 var $form = document.querySelector('form');
-var searchDefaultText = document.querySelector('h2');
+var searchDefaultText = document.querySelector('.search-default');
 var modalWindowContainer = document.querySelector('.modal-window-container');
 var infoModalBackground = document.querySelector('.info-modal');
 var confirmModalBackground = document.querySelector('.confirm-modal');
+var viewNodeList = document.querySelectorAll('.view');
+var favUl = document.querySelector('.fav-villager-list');
+var favDefaultText = document.querySelector('.fav-default');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -15,7 +18,21 @@ xhr.addEventListener('load', function () {
     dataArr.push(xhr.response[keys]);
   }
   for (var i = 0; i < dataArr.length; i++) {
-    $ul.appendChild(renderVillager(dataArr[i]));
+    allVillagerUl.appendChild(renderVillager(dataArr[i]));
+  }
+  viewSwap(data.dataView);
+  if (data.favVillagers.length === 0) {
+    favDefaultText.className = 'gorditas fav-default';
+  } else {
+    favDefaultText.className = 'gorditas fav-default hidden';
+  }
+  var heartIcon = document.querySelectorAll('.fa-heart');
+  for (var k = 0; k < data.favVillagers.length; k++) {
+    var number = data.favVillagers[k].id - 1;
+    heartIcon[number].className = 'fa-solid fa-heart';
+    var favoritedVillager = renderVillager(data.favVillagers[k]);
+    favUl.prepend(favoritedVillager);
+    favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
   }
 });
 xhr.send();
@@ -51,7 +68,7 @@ function handleSearchInput(event) {
   for (var i = 0; i < liNodeList.length; i++) {
     if (searchInput.value === '') {
       liNodeList[i].className = 'column-full column-fourth';
-      searchDefaultText.className = 'gorditas hidden';
+      searchDefaultText.className = 'gorditas search-default hidden';
     }
   }
 }
@@ -61,14 +78,14 @@ $form.addEventListener('input', handleSearchInput);
 function handleSearchInputSubmit(event) {
   event.preventDefault();
   var liNodeList = document.querySelectorAll('li');
-  searchDefaultText.className = 'gorditas';
+  searchDefaultText.className = 'gorditas search-default';
   for (var i = 0; i < liNodeList.length; i++) {
     liNodeList[i].className = 'column-full column-fourth hidden';
   }
   for (var k = 0; k < liNodeList.length; k++) {
     if (searchInput.value.toLowerCase() === liNodeList[k].getAttribute('data-villager').toLowerCase()) {
       liNodeList[k].className = 'column-full column-fourth';
-      searchDefaultText.className = 'gorditas hidden';
+      searchDefaultText.className = 'gorditas search-default hidden';
       break;
     }
   }
@@ -155,10 +172,17 @@ function heartHandleClick(event) {
         heartIcon[i].className = 'fa-solid fa-heart';
         heartIcon[i].removeAttribute('data-target');
         var favDataObj = {
-          name: dataArr[i].name['name-USen'],
-          image: dataArr[i].image_uri
+          name: {
+            'name-USen': dataArr[i].name['name-USen']
+          },
+          image_uri: dataArr[i].image_uri,
+          id: dataArr[i].id
         };
         data.favVillagers.push(favDataObj);
+        var favoritedVillager = renderVillager(dataArr[i]);
+        favUl.prepend(favoritedVillager);
+        favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
+        favDefaultText.className = 'gorditas fav-default hidden';
         return;
       }
     }
@@ -175,3 +199,23 @@ function heartHandleClick(event) {
 }
 
 document.addEventListener('click', heartHandleClick);
+
+function viewSwap(dataView) {
+  for (var i = 0; i < viewNodeList.length; i++) {
+    if (viewNodeList[i].getAttribute('data-view') === dataView) {
+      viewNodeList[i].className = 'container view';
+    } else {
+      viewNodeList[i].className = 'container view hidden';
+    }
+  }
+}
+
+function viewSwapHandleClick(event) {
+  if (event.target.matches('a') === false) {
+    return;
+  }
+  viewSwap(event.target.getAttribute('data-view'));
+  data.dataView = event.target.getAttribute('data-view');
+}
+
+document.addEventListener('click', viewSwapHandleClick);

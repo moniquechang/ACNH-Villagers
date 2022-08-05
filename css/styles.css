@@ -10,9 +10,21 @@ header {
   background-color: #70604a;
 }
 
-h3 {
-  margin-left: 1.4rem;
+h3,
+h4 {
   color: white;
+  margin-left: 1.4rem;
+  display: inline-block;
+}
+
+a:link,
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 h1 {
@@ -179,6 +191,10 @@ p {
 
 .hidden {
   display: none;
+}
+
+.fav-villager-list {
+  margin-top: 2rem;
 }
 
 @media screen and (min-width: 768px) {

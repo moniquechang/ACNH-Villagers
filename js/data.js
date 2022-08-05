@@ -1,5 +1,6 @@
 /* exported data */
 var data = {
+  dataView: 'all-villagers',
   favVillagers: []
 };
 

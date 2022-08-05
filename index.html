@@ -30,13 +30,14 @@
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <h3 class="gorditas">ACNH Villagers</h3>
+          <h3 class="gorditas"><a data-view="all-villagers" href="#">ACNH Villagers</a></h3>
+          <h4 class="gorditas"><a data-view="fav-villagers" href="#">Favorites</a></h4>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div class="container">
+    <div class="container view" data-view="all-villagers">
       <div class="row">
         <div class="column-full">
           <h1 class="gorditas">Villagers</h1>
@@ -47,8 +48,22 @@
       </div>
       <div class="row">
         <div class="column-full">
-          <h2 class="gorditas hidden">No villagers have this name...</h2>
-          <ul class="list-display">
+          <h2 class="gorditas search-default hidden">No villagers have this name...</h2>
+          <ul class="all-villager-list list-display">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container view hidden" data-view="fav-villagers">
+      <div class="row">
+        <div class="column-full">
+          <h1 class="gorditas">Favorite Villagers</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-full">
+          <h2 class="gorditas fav-default hidden">No favorite villagers yet!</h2>
+          <ul class="fav-villager-list list-display">
           </ul>
         </div>
       </div>
