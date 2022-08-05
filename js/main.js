@@ -1,5 +1,5 @@
 var dataArr = [];
-var $ul = document.querySelector('ul');
+var allVillagerUl = document.querySelector('.all-villager-list');
 var searchInput = document.querySelector('input');
 var $form = document.querySelector('form');
 var searchDefaultText = document.querySelector('h2');
@@ -7,6 +7,7 @@ var modalWindowContainer = document.querySelector('.modal-window-container');
 var infoModalBackground = document.querySelector('.info-modal');
 var confirmModalBackground = document.querySelector('.confirm-modal');
 var viewNodeList = document.querySelectorAll('.view');
+var favUl = document.querySelector('.fav-villager-list');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -16,7 +17,7 @@ xhr.addEventListener('load', function () {
     dataArr.push(xhr.response[keys]);
   }
   for (var i = 0; i < dataArr.length; i++) {
-    $ul.appendChild(renderVillager(dataArr[i]));
+    allVillagerUl.appendChild(renderVillager(dataArr[i]));
   }
   var heartIcon = document.querySelectorAll('.fa-heart');
   for (var k = 0; k < data.favVillagers.length; k++) {
@@ -161,11 +162,16 @@ function heartHandleClick(event) {
         heartIcon[i].className = 'fa-solid fa-heart';
         heartIcon[i].removeAttribute('data-target');
         var favDataObj = {
-          name: dataArr[i].name['name-USen'],
-          image: dataArr[i].image_uri,
+          name: {
+            'name-USen': dataArr[i].name['name-USen']
+          },
+          image_uri: dataArr[i].image_uri,
           id: dataArr[i].id
         };
         data.favVillagers.push(favDataObj);
+        var favoritedVillager = renderVillager(dataArr[i]);
+        favUl.appendChild(favoritedVillager);
+        favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
         return;
       }
     }
