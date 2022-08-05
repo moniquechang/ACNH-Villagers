@@ -2,7 +2,7 @@ var dataArr = [];
 var allVillagerUl = document.querySelector('.all-villager-list');
 var searchInput = document.querySelector('input');
 var $form = document.querySelector('form');
-var searchDefaultText = document.querySelector('h2');
+var searchDefaultText = document.querySelector('.search-default');
 var modalWindowContainer = document.querySelector('.modal-window-container');
 var infoModalBackground = document.querySelector('.info-modal');
 var confirmModalBackground = document.querySelector('.confirm-modal');
@@ -23,6 +23,9 @@ xhr.addEventListener('load', function () {
   for (var k = 0; k < data.favVillagers.length; k++) {
     var number = data.favVillagers[k].id - 1;
     heartIcon[number].className = 'fa-solid fa-heart';
+    var favoritedVillager = renderVillager(data.favVillagers[k]);
+    favUl.prepend(favoritedVillager);
+    favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
   }
 });
 xhr.send();
@@ -58,7 +61,7 @@ function handleSearchInput(event) {
   for (var i = 0; i < liNodeList.length; i++) {
     if (searchInput.value === '') {
       liNodeList[i].className = 'column-full column-fourth';
-      searchDefaultText.className = 'gorditas hidden';
+      searchDefaultText.className = 'gorditas search-default hidden';
     }
   }
 }
@@ -68,14 +71,14 @@ $form.addEventListener('input', handleSearchInput);
 function handleSearchInputSubmit(event) {
   event.preventDefault();
   var liNodeList = document.querySelectorAll('li');
-  searchDefaultText.className = 'gorditas';
+  searchDefaultText.className = 'gorditas search-default';
   for (var i = 0; i < liNodeList.length; i++) {
     liNodeList[i].className = 'column-full column-fourth hidden';
   }
   for (var k = 0; k < liNodeList.length; k++) {
     if (searchInput.value.toLowerCase() === liNodeList[k].getAttribute('data-villager').toLowerCase()) {
       liNodeList[k].className = 'column-full column-fourth';
-      searchDefaultText.className = 'gorditas hidden';
+      searchDefaultText.className = 'gorditas search-default hidden';
       break;
     }
   }
@@ -170,7 +173,7 @@ function heartHandleClick(event) {
         };
         data.favVillagers.push(favDataObj);
         var favoritedVillager = renderVillager(dataArr[i]);
-        favUl.appendChild(favoritedVillager);
+        favUl.prepend(favoritedVillager);
         favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
         return;
       }
