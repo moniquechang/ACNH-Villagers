@@ -17,6 +17,11 @@ xhr.addEventListener('load', function () {
   for (var i = 0; i < dataArr.length; i++) {
     $ul.appendChild(renderVillager(dataArr[i]));
   }
+  var heartIcon = document.querySelectorAll('.fa-heart');
+  for (var k = 0; k < data.favVillagers.length; k++) {
+    var number = data.favVillagers[k].id - 1;
+    heartIcon[number].className = 'fa-solid fa-heart';
+  }
 });
 xhr.send();
 
@@ -156,7 +161,8 @@ function heartHandleClick(event) {
         heartIcon[i].removeAttribute('data-target');
         var favDataObj = {
           name: dataArr[i].name['name-USen'],
-          image: dataArr[i].image_uri
+          image: dataArr[i].image_uri,
+          id: dataArr[i].id
         };
         data.favVillagers.push(favDataObj);
         return;
