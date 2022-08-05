@@ -20,6 +20,7 @@ xhr.addEventListener('load', function () {
   for (var i = 0; i < dataArr.length; i++) {
     allVillagerUl.appendChild(renderVillager(dataArr[i]));
   }
+  viewSwap(data.dataView);
   if (data.favVillagers.length === 0) {
     favDefaultText.className = 'gorditas fav-default';
   } else {
