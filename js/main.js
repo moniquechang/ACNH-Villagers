@@ -8,6 +8,7 @@ var infoModalBackground = document.querySelector('.info-modal');
 var confirmModalBackground = document.querySelector('.confirm-modal');
 var viewNodeList = document.querySelectorAll('.view');
 var favUl = document.querySelector('.fav-villager-list');
+var favDefaultText = document.querySelector('.fav-default');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -18,6 +19,11 @@ xhr.addEventListener('load', function () {
   }
   for (var i = 0; i < dataArr.length; i++) {
     allVillagerUl.appendChild(renderVillager(dataArr[i]));
+  }
+  if (data.favVillagers.length === 0) {
+    favDefaultText.className = 'gorditas fav-default';
+  } else {
+    favDefaultText.className = 'gorditas fav-default hidden';
   }
   var heartIcon = document.querySelectorAll('.fa-heart');
   for (var k = 0; k < data.favVillagers.length; k++) {
@@ -175,6 +181,7 @@ function heartHandleClick(event) {
         var favoritedVillager = renderVillager(dataArr[i]);
         favUl.prepend(favoritedVillager);
         favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
+        favDefaultText.className = 'gorditas fav-default hidden';
         return;
       }
     }
