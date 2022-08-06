@@ -49,6 +49,11 @@ input {
   margin-right: 1.2rem;
 }
 
+input:hover {
+  cursor: pointer;
+  background-color: #ebe3da;
+}
+
 input:focus {
   outline: none;
 }
@@ -72,6 +77,15 @@ ul {
   text-align: center;
   margin: 1rem 0;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+.villager-polaroid:hover {
+  transform: rotate(-1.5deg);
+}
+
+.fa-regular:hover {
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 
 .fa-heart {
@@ -104,6 +118,7 @@ p {
 
 .villager-polaroid > p:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .modal-background {
@@ -191,6 +206,12 @@ p {
 
 .fav-villager-list {
   margin-top: 2rem;
+}
+
+.fa-rectangle-xmark,
+.no-button,
+.yes-button {
+  cursor: pointer;
 }
 
 .hidden {
