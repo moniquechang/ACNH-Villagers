@@ -9,6 +9,7 @@ var confirmModalBackground = document.querySelector('.confirm-modal');
 var viewNodeList = document.querySelectorAll('.view');
 var favUl = document.querySelector('.fav-villager-list');
 var favDefaultText = document.querySelector('.fav-default');
+var loadingIcon = document.querySelector('.loading-icon');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
@@ -20,6 +21,7 @@ xhr.addEventListener('load', function () {
   for (var i = 0; i < dataArr.length; i++) {
     allVillagerUl.appendChild(renderVillager(dataArr[i]));
   }
+  loadingIcon.className = 'lds-heart hidden';
   viewSwap(data.dataView);
   if (data.favVillagers.length === 0) {
     favDefaultText.className = 'gorditas fav-default';
