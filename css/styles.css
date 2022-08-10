@@ -96,6 +96,15 @@ ul {
   bottom: 1.2rem;
 }
 
+.default-text-heart {
+  position: static;
+}
+
+.default-text-heart:hover {
+  pointer-events: none;
+  font-size: 1.4rem;
+}
+
 img {
   width: 90%;
   margin-top: 1.2rem;
@@ -303,6 +312,10 @@ p {
     right: 0.8rem;
   }
 
+  .default-text-heart {
+    font-size: 1.4rem;
+  }
+
   .modal-window-container {
     width: 40%;
   }
@@ -343,6 +356,10 @@ p {
   .fa-heart {
     font-size: 1.5rem;
     right: 1rem;
+  }
+
+  .default-text-heart:hover {
+    font-size: 1.5rem;
   }
 
   .modal-window-container {

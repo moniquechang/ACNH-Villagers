@@ -10,11 +10,16 @@ var viewNodeList = document.querySelectorAll('.view');
 var favUl = document.querySelector('.fav-villager-list');
 var favDefaultText = document.querySelector('.fav-default');
 var loadingIcon = document.querySelector('.loading-icon');
+var networkFailText = document.querySelector('.network-fail-text');
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://acnhapi.com/v1/villagers/');
 xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
+  if (xhr.status !== 200) {
+    networkFailText.className = 'gorditas network-fail-text';
+    loadingIcon.className = 'lds-heart hidden';
+  }
   for (var keys in xhr.response) {
     dataArr.push(xhr.response[keys]);
   }
@@ -22,7 +27,6 @@ xhr.addEventListener('load', function () {
     allVillagerUl.appendChild(renderVillager(dataArr[i]));
   }
   loadingIcon.className = 'lds-heart hidden';
-  viewSwap(data.dataView);
   if (data.favVillagers.length === 0) {
     favDefaultText.className = 'gorditas fav-default';
   } else {
@@ -36,6 +40,7 @@ xhr.addEventListener('load', function () {
     favUl.prepend(favoritedVillager);
     favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
   }
+  viewSwap(data.dataView);
 });
 xhr.send();
 
@@ -163,7 +168,7 @@ document.addEventListener('click', nameHandleClick);
 
 function heartHandleClick(event) {
   var heartIcon = document.querySelectorAll('.fa-heart');
-  if (event.target.matches('.fa-regular')) {
+  if (event.target.matches('.fa-regular') && !event.target.matches('.default-text-heart')) {
     confirmModalBackground.className = 'confirm-modal modal-background';
     event.target.setAttribute('data-target', 'yes');
   }
