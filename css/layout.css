@@ -18,8 +18,7 @@ li {
 
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 1000px;
-    margin: auto;
+    max-width: 900px;
   }
 
   .column-fourth {
@@ -34,5 +33,11 @@ li {
   li {
     display: flex;
     justify-content: end;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    max-width: 1400px;
   }
 }
