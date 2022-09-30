@@ -42,11 +42,11 @@ input {
   font-size: 1.4rem;
   color: #70604a;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   width: 9rem;
+  margin-right: 0.2rem;
   padding-left: 0.8rem;
-  margin-right: 1.2rem;
 }
 
 input:hover {
@@ -56,6 +56,21 @@ input:hover {
 
 input:focus {
   outline: none;
+}
+
+.search-button {
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  background-color: #70604a;
+  padding: 0.4rem 0.5rem;
+  margin-right: 1.2rem;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+.search-button:hover {
+  cursor: pointer;
 }
 
 h2 {
@@ -304,7 +319,11 @@ p {
   }
 
   input {
-    margin: 0;
+    width: 10rem;
+  }
+
+  .search-button {
+    margin-right: 0;
   }
 
   .fa-heart {
@@ -345,7 +364,7 @@ p {
   }
 
   input {
-    width: 10rem;
+    width: 11rem;
   }
 
   .fa-regular:hover {
