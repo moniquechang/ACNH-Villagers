@@ -10,6 +10,7 @@ function handleBeforeUnload(event) {
 }
 
 window.addEventListener('beforeunload', handleBeforeUnload);
+window.addEventListener('pagehide', handleBeforeUnload);
 
 var previousData = localStorage.getItem('acnh-villager-local-storage');
 if (previousData !== null) {

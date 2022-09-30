@@ -38,7 +38,8 @@ xhr.addEventListener('load', function () {
     heartIcon[number].className = 'fa-solid fa-heart';
     var favoritedVillager = renderVillager(data.favVillagers[k]);
     favUl.prepend(favoritedVillager);
-    favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
+    var iconElement = favoritedVillager.querySelector('i');
+    iconElement.className = 'fa-solid fa-heart';
   }
   viewSwap(data.dataView);
 });
@@ -58,14 +59,18 @@ function renderVillager(data) {
   villagerImage.setAttribute('alt', data.name['name-USen']);
   villagerPolaroidDiv.appendChild(villagerImage);
 
+  var villagerNameAnchor = document.createElement('a');
   var villagerName = document.createElement('p');
   var name = document.createTextNode(data.name['name-USen']);
   villagerName.appendChild(name);
-  villagerPolaroidDiv.appendChild(villagerName);
+  villagerNameAnchor.appendChild(villagerName);
+  villagerPolaroidDiv.appendChild(villagerNameAnchor);
 
+  var heartIconAnchor = document.createElement('a');
   var heartIcon = document.createElement('i');
   heartIcon.setAttribute('class', 'fa-regular fa-heart');
-  villagerPolaroidDiv.appendChild(heartIcon);
+  heartIconAnchor.appendChild(heartIcon);
+  villagerPolaroidDiv.appendChild(heartIconAnchor);
 
   return list;
 }
@@ -104,9 +109,11 @@ function renderVillagerInfo(data) {
   var modalWindowPaperDiv = document.createElement('div');
   modalWindowPaperDiv.setAttribute('class', 'modal-window-paper');
 
+  var xmarkIconAnchor = document.createElement('a');
   var xmarkIcon = document.createElement('i');
   xmarkIcon.setAttribute('class', 'fa-solid fa-rectangle-xmark');
-  modalWindowPaperDiv.appendChild(xmarkIcon);
+  xmarkIconAnchor.appendChild(xmarkIcon);
+  modalWindowPaperDiv.appendChild(xmarkIconAnchor);
 
   var villagerIcon = document.createElement('img');
   villagerIcon.setAttribute('src', data.icon_uri);
@@ -148,7 +155,7 @@ function renderVillagerInfo(data) {
 }
 
 function nameHandleClick(event) {
-  if (event.target.matches('.villager-polaroid > p')) {
+  if (event.target.matches('.villager-polaroid > a > p')) {
     infoModalBackground.className = 'info-modal modal-background';
     for (var i = 0; i < dataArr.length; i++) {
       if (event.target.textContent === dataArr[i].name['name-USen']) {
@@ -158,7 +165,7 @@ function nameHandleClick(event) {
     }
   }
   var modalWindowPaperDiv = document.querySelector('.modal-window-paper');
-  if (event.target.matches('.fa-rectangle-xmark')) {
+  if (event.target.matches('a > i')) {
     infoModalBackground.className = 'info-modal modal-background hidden';
     modalWindowContainer.removeChild(modalWindowPaperDiv);
   }
@@ -188,7 +195,8 @@ function heartHandleClick(event) {
         data.favVillagers.push(favDataObj);
         var favoritedVillager = renderVillager(dataArr[i]);
         favUl.prepend(favoritedVillager);
-        favoritedVillager.firstChild.lastChild.className = 'fa-solid fa-heart';
+        var iconElement = favoritedVillager.querySelector('i');
+        iconElement.className = 'fa-solid fa-heart';
         favDefaultText.className = 'gorditas fav-default hidden';
         return;
       }
