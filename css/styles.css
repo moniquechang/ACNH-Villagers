@@ -140,7 +140,7 @@ p {
   border-top: 0.3rem solid #d8c3ae;
 }
 
-.villager-polaroid > p:hover {
+.villager-polaroid > a > p:hover {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -170,7 +170,7 @@ p {
   border-radius: 0.4rem;
 }
 
-.fa-rectangle-xmark {
+.modal-window-paper > a {
   position: absolute;
   top: 0.1rem;
   right: 0.2rem;
