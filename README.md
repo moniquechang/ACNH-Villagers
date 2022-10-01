@@ -48,7 +48,7 @@ Try the application live at [https://moniquechang.github.io/ACNH-Villagers/](htt
 
     ```shell
     git clone https://github.com/moniquechang/ACNH-Villagers
-    cd sgt-react
+    cd ACNH-Villagers
     ```
 
 1. Once cloned you can view the application by opening http://localhost:3000 in your browser.
