@@ -51,5 +51,5 @@ Try the application live at [https://moniquechang.github.io/ACNH-Villagers/](htt
     cd ACNH-Villagers
     ```
 
-1. Once cloned you can view the application by opening http://localhost:3000 in your browser.
+1. Once cloned you can view the application by opening index.html in your browser.
 
