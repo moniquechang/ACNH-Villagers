@@ -47,7 +47,7 @@ Try the application live at [https://moniquechang.github.io/ACNH-Villagers/](htt
 1. Clone the repository.
 
     ```shell
-    git clone https://github.com/moniquechang/ACNH-Villagers
+    git clone git@github.com:moniquechang/ACNH-Villagers.git
     cd ACNH-Villagers
     ```
 
