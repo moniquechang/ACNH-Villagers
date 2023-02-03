@@ -34,7 +34,7 @@ Try the application live at [https://moniquechang.github.io/ACNH-Villagers/](htt
   - Users can click each villager to see more in depth information about that villager
   
   
-  <img src="images/user-can-view-villager-info.gif" width="500">
+  <img src="images/user-can-view-villager-info.gif" width=500>
 
 ## Stretch Features I Would Like To Implement:
 - User can remove a villager from their favorites list
